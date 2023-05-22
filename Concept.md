@@ -37,7 +37,7 @@
 
 ## Демо
 
-devops1.gif
+![Example](devops1.gif)
 
 ## Висновки
 
