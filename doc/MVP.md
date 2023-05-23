@@ -1,3 +1,3 @@
 ## Демо
 
-![Example](mvp.webm)
+![Example](mvp.gif)
