@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#if no arg - print help and exit
+[ $# -eq 0 ] && echo use kubectl ntop arg1 arg2, where arg1 - 'pod' or 'node', arg2 - namespace   && exit
+
+#if no namespace - set to default
+NS="${2:-default}"
+
+# Define command-line arguments
+RESOURCE_TYPE=$1
+
+# Retrieve resource usage statistics from Kubernetes
+kubectl top $RESOURCE_TYPE -n $NS | tail -n +2 | while read line
+do
+  # Extract CPU and memory usage from the output
+  NAME=$(echo $line | awk '{print $1}')
+  CPU=$(echo $line | awk '{print $2}')
+  MEMORY=$(echo $line | awk '{print $3}')
+
+  # Output the statistics to the console
+  # "Resource, Namespace, Name, CPU, Memory"
+  echo  $1 $NS $NAME $CPU $MEMORY
+  
+done
+
